@@ -23,7 +23,7 @@ app.use(
     // what we are storing in the cooking, we will just
     // make the cookie not encrypted.
     signed: false,
-    secure: true,
+    secure: process.env.NODE_ENV !== 'test',
   })
 );
 
@@ -32,7 +32,7 @@ app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
 
-app.all("*", async () => {
+app.all("*", async (req) => {
   throw new NotFoundError();
 });
 
