@@ -4,11 +4,6 @@ import { json } from "body-parser";
 import cookieSession from "cookie-session";
 import { errorHandler, NotFoundError } from "@dyllandry-tickets/common";
 
-import { currentUserRouter } from "./routes/current-user";
-import { signinRouter } from "./routes/signin";
-import { signoutRouter } from "./routes/signout";
-import { signupRouter } from "./routes/signup";
-
 const app = express();
 // Express will see that traffic is coming through an nginx proxy.
 // Tell express that it's okay.
@@ -25,11 +20,6 @@ app.use(
     secure: process.env.NODE_ENV !== 'test',
   })
 );
-
-app.use(currentUserRouter);
-app.use(signinRouter);
-app.use(signoutRouter);
-app.use(signupRouter);
 
 app.all("*", async (req) => {
   throw new NotFoundError();
