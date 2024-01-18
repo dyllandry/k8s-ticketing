@@ -1,15 +1,18 @@
 import mongoose from "mongoose";
 import { Password } from "../services/password";
 
+// Properties required when building/creating a new ticket.
 type UserBuildAttrs = {
   email: string;
   password: string;
 };
 
+// Type for the model class.
 type UserModel = mongoose.Model<UserDoc> & {
   build(attrs: UserBuildAttrs): UserDoc;
 };
 
+// Type for all the properties a user has.
 type UserDoc = mongoose.Document & {
   email: string;
   password: string;
