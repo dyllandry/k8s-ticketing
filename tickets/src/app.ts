@@ -10,6 +10,7 @@ import {
 } from "@dyllandry-tickets/common";
 import { createTicketRouter } from "./routes/new";
 import { showTicketRouter } from "./routes/show";
+import { indexTicketRouter } from "./routes";
 
 const app = express();
 // Express will see that traffic is coming through an nginx proxy.
@@ -24,7 +25,7 @@ app.use(
     // what we are storing in the cooking, we will just
     // make the cookie not encrypted.
     signed: false,
-    secure: process.env.NODE_ENV !== 'test',
+    secure: process.env.NODE_ENV !== "test",
   })
 );
 
@@ -32,6 +33,7 @@ app.use(currentUser);
 
 app.use(createTicketRouter);
 app.use(showTicketRouter);
+app.use(indexTicketRouter);
 
 app.all("*", async (req) => {
   throw new NotFoundError();
